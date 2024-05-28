@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::table('entrance_fees', function (Blueprint $table) {
             $table->renameColumn('exam_name', 'course_id');
+            // $table->integer('course_id')->nullable()->change();
+        });
+        Schema::table('entrance_fees', function (Blueprint $table) {
             $table->integer('course_id')->nullable()->change();
         });
     }

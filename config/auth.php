@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
 
     /*
@@ -40,8 +42,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+     
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
         'user' => [
-            'driver' => 'session',
+            'driver' => 'session', // or 'passport' if using API authentication
             'provider' => 'users',
         ],
     ],
@@ -66,7 +73,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
 
         // 'users' => [

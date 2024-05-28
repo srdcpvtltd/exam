@@ -3,6 +3,7 @@
 /****************** TEACHER MIDDLEWARE PAGES ROUTES START****************/
 
 use App\Http\Controllers\Teacher\StudentAttendanceController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'teacher', 'as'=>'teacher.','middleware' => 'auth:user','teacher'], function () { 
     /*******************DASHBOARD ROUTE START*************/       
