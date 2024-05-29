@@ -10,13 +10,27 @@ use Illuminate\Support\Facades\Log;
 
 class SubjectController extends Controller
 {
-    public function get_subject()
+    public function get_subject(Request $request)
     {
-        $subjects = Subject::where('course_id', Auth::user()->studentProfile->course_id)
+        $search_text = $request->search_text;
+        $limit = $request->limit > 0 ? $request->limit : 10;
+        $index = $request->index > 0 ? $request->index : 0;
+        $q = Subject::where('course_id', Auth::user()->studentProfile->course_id)
             ->where('semester_id', Auth::user()->studentProfile->semester_id)
             ->with(['course', 'semester'])
-            ->get();
+            ->limit($limit)
+            ->offSet($index);
         // dd($subjects->course);
+        if ($search_text) {
+            $q->where(function ($query) use ($search_text) {
+                $query->where('name', 'like', "%{$search_text}%")
+                    ->orWhereHas('course', function ($query) use ($search_text) {
+                        $query->where('title', 'like', "%{$search_text}%");
+                    });
+            });
+        }
+
+        $subjects = $q->get();
         foreach ($subjects as $subject) {
 
             // Log::info();
