@@ -26,8 +26,16 @@ class SubjectController extends Controller
             $subject->unsetRelation('semester');
         }
 
-        return response()->json([
-            'data' => $subjects
-        ]);
+        if ($subjects) {
+            return response()->json([
+                'data' => $subjects,
+                'code' => 200
+            ]);
+        }else{
+            return response()->json([
+                'message' => "No subject found with the specified criteria.",
+                'code' => 500
+            ]);
+        }
     }
 }
