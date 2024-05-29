@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\Student\ExamController;
 use App\Http\Controllers\API\Student\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',[LoginController::class,'login']);
 
 Route::middleware('auth:api')->group(function(){
-    Route::get("get-subject",[SubjectController::class,'get_subject']); //Get Subject
+    Route::post("get-subject",[SubjectController::class,'get_subject']); //Get Subject
+    Route::post("get-exam",[ExamController::class,'get_exams']); //Get Exam details
 });
