@@ -214,12 +214,12 @@
 
         </div>
     </div>
-    <div id="AppendSize" style="display: none">
+    {{-- <div id="AppendSize" style="display: none">
         <div class="row">
             <div class="col-md-6">
                 <label>Course</label>
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <select name="teacher_course_id[]" id="course_id" class="form-control"
+                    <select name="teacher_course_id[]" id="coursee_id" class="form-control"
                         >
                         <option value="">Select Courses</option>
                         @foreach (App\Models\Web\Course::all() as $course)
@@ -234,11 +234,14 @@
                 <div class="form-group form-group-feedback form-group-feedback-left">
                     <select name="teacher_subject_id[]" id="subject_id" class="form-control">
                         <option>Select Subjects</option>
+                        @foreach (App\Models\Subject::all() as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- /page content -->
     <script src="{{ asset('user_asset/assets/js/toastr.js') }}"></script>
     @include('auth.partials.js')

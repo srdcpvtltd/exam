@@ -24,6 +24,8 @@
     <br>
     <button class="btn btn-sm btn-primary add_row_course_subject" type="button">Add More Course & Subject
         Field</button>
+    <button class="btn btn-sm btn-primary add_course_subject" type="button">Add More Course & Subject
+        Field</button>
 </div>
 
 <div class="col-md-12" id="course_field">
@@ -31,7 +33,8 @@
         <div class="col-md-6">
             <label>Course</label>
             <div class="form-group form-group-feedback form-group-feedback-left">
-                <select name="teacher_course_id[]" id="course_id" class="form-control select-search course_id" data-fouc>
+                <select name="teacher_course_id[]" id="course_id" class="form-control select-search course_id"
+                    data-fouc>
                     <option selected disabled>Select Courses</option>
                 </select>
             </div>
@@ -42,11 +45,40 @@
             <div class="form-group form-group-feedback form-group-feedback-left">
                 <select name="teacher_subject_id[]" id="subject_id" class="form-control select-search" data-fouc>
                     <option>Select Subjects</option>
+                    @foreach (App\Models\Subject::all() as $subject)
+                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
     </div>
 </div>
+<div id="AppendSize" style="display: none" class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <label>Course</label>
+            <div class="form-group form-group-feedback form-group-feedback-left">
+                <select name="teacher_course_id[]" id="coursee_id" class="form-control coursee_id">
+                    <option value="">Select Courses</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label>Subject</label>
+            <div class="form-group form-group-feedback form-group-feedback-left">
+                <select name="teacher_subject_id[]" id="subject_id" class="form-control">
+                    <option>Select Subjects</option>
+                    @foreach (App\Models\Subject::all() as $subject)
+                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Appenddiv" class="col-md-12"></div>
 <script>
     $(document).on('change', '#collegee_id', function(event) {
         college_id = $(this).val();
@@ -72,38 +104,66 @@
         })
     });
 
-    $(document).on('change', '#course_id', function(event) {
-        course_id = $(this).val();
-        event.preventDefault();
-        $.ajax({
-            url: '{{ url('get_subject_aganist_course') }}',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            dataType: 'JSON',
-            data: {
-                'course_id': course_id,
-            },
-            success: function(res) {
-                $('#subject_id').empty();
-                $('#subject_id').html('<option value="">Select College Course</option>');
-                $.each(res, function(key, value) {
-                    $('#subject_id').append('<option value="' + value
-                        .id + '">' + value.name + '</option>');
-                });
-            }
+    // $(document).on('change', '#course_id', function(event) {
+    //     course_id = $(this).val();
+    //     event.preventDefault();
+    //     $.ajax({
+    //         url: '{{ url('get_subject_aganist_course') }}',
+    //         type: 'POST',
+    //         headers: {
+    //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    //         },
+    //         dataType: 'JSON',
+    //         data: {
+    //             'course_id': course_id,
+    //         },
+    //         success: function(res) {
+    //             $('#subject_id').empty();
+    //             $('#subject_id').html('<option value="">Select College Course</option>');
+    //             $.each(res, function(key, value) {
+    //                 $('#subject_id').append('<option value="' + value
+    //                     .id + '">' + value.name + '</option>');
+    //             });
+    //         }
+    //     });
+    // });
+
+    $(document).ready(function() {
+        $('.add_course_subject').hide();
+
+        $(document).on('click', '.add_row_course_subject', function() {
+            $('#AppendSize').css("display", "block");
+            college_id = $('#collegee_id').val();
+            event.preventDefault();
+            $.ajax({
+                url: '{{ url('get_course_aganist_college') }}',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                dataType: 'JSON',
+                data: {
+                    'college_id': college_id,
+                },
+                success: function(res) {
+                    $('.coursee_id').empty();
+                    $('.coursee_id').html(
+                        '<option value="">Select College Course</option>');
+                    $.each(res, function(key, value) {
+                        $('.coursee_id').append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                    $('.add_row_course_subject').hide();
+                    $('.add_course_subject').show();
+                }
+            })
+        });
+
+        $(document).on('click', '.add_course_subject', function() {
+            html = $('#AppendSize').html();
+            console.log(html);
+            $('#Appenddiv').append(html);
+            $('.select-2').addClass('select-search');
         });
     });
-</script>
-
-<script>
-    $(document).ready(function() {
-    $(document).on('click', '.add_row_course_subject', function() {
-        html = $('#AppendSize').html();
-            console.log(html);
-        $('#course_field').append(html);
-        $('.select-2').addClass('select-search');
-    });
-});
 </script>

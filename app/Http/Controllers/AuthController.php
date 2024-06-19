@@ -213,13 +213,16 @@ class AuthController extends Controller
 
             }else if($request->role_id == 4)
             {
-                TeacherProfile::create([
-                    'college_id' => $request->teacher_college_id,
-                    'phone' => $request->teacher_phone,
-                    'course_id' => $request->teacher_course_id,
-                    'subject_id' => $request->teacher_subject_id,
-                    'user_id' => $user->id,
-                ]);
+                $count = count($request->teacher_course_id);
+                for($i=0; $i<$count; $i++){
+                    TeacherProfile::create([
+                        'college_id' => $request->teacher_college_id,
+                        'phone' => $request->teacher_phone,
+                        'course_id' => $request->teacher_course_id[$i],
+                        'subject_id' => $request->teacher_subject_id[$i],
+                        'user_id' => $user->id,
+                    ]);
+                }
             }
             toastr()->success('Your Account Has Been successfully Created, Please Login and See Next Step Guides.');
             return redirect(url('/'));
