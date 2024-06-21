@@ -175,6 +175,12 @@
 								<li class="nav-item"><a href="{{route('prospect.mock-results')}}" class="nav-link {{Request::is('prospect/mock-results*')?'active':''}}">Mock Results</a></li>
 							</ul>
 						</li>
+                        <li class="nav-item">
+							<a href="{{route('prospect.Instruction.list')}}" class="nav-link {{Request::is('prospect/instruction*')?'active':''}}">
+								<i class="fas fa-info-circle"></i>
+								<span>Instructions</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 				<!-- /main navigation -->

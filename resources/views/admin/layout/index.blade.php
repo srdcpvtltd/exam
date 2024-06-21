@@ -226,6 +226,12 @@
 							</ul>
 						</li>
 						<li class="nav-item">
+							<a href="{{route('admin.Instruction.list')}}" class="nav-link {{Request::is('instruction/list')?'active':''}}">
+								<i class="fas fa-info-circle"></i>
+								<span>Instructions</span>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a href="{{route('admin.gateway.index')}}" class="nav-link {{Request::is('admin/gateway')?'active':''}}">
 								<i class="icon-file-text"></i>
 								<span>Gateway</span>

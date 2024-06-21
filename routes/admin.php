@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\GatewayDetailController;
+use App\Http\Controllers\Admin\InstructionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ShiftController;
 use Illuminate\Support\Facades\Route;
@@ -101,6 +102,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:user'
     Route::post('adminuser/update',[AdminUserController::class,'update'])->name('AdminUser.update');
     Route::get('adminuser/delete{id}',[AdminUserController::class,'delete'])->name('AdminUser.delete');
     /*******************ADMIN USER ROUTE END*************/
+
+    /*******************Instruction START*************/
+    Route::get('instruction/list',[InstructionController::class,'list'])->name('Instruction.list');
+    Route::get('instruction/add',[InstructionController::class,'add'])->name('Instruction.add');
+    Route::post('instruction/store',[InstructionController::class,'store'])->name('Instruction.store');
+    Route::get('instruction/edit{id}',[InstructionController::class,'edit'])->name('Instruction.edit');
+    Route::post('instruction/update',[InstructionController::class,'update'])->name('Instruction.update');
+    Route::get('instruction/delete{id}',[InstructionController::class,'delete'])->name('Instruction.delete');
+    /*******************Instruction END*************/
 
     /*******************COURSE ROUTE START*************/
     // Route::resource('course', CourseController::class);

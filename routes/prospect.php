@@ -2,6 +2,7 @@
 
 /****************** PROSPECT MIDDLEWARE PAGES ROUTES START****************/
 
+use App\Http\Controllers\Prospect\InstructionController;
 use App\Http\Controllers\Prospect\AuthController;
 use App\Http\Controllers\Prospect\CenterMappingController;
 use App\Http\Controllers\Prospect\DashboardController;
@@ -54,6 +55,12 @@ Route::group(['prefix' => 'prospect', 'as'=>'prospect.','middleware' => 'auth:us
     Route::post('/store-answer', [AnswerController::class, 'store'])->name('store.answer');
     Route::get('/results', [ResultController::class, 'index'])->name('results');
     Route::get('/mock-results', [ResultController::class, 'mockResults'])->name('mock-results');
+
+    Route::post('/get_question',[QuizController::class,'getQuestion'])->name('getQuestion');
+
+    //Instructions
+    Route::get('instruction/list',[InstructionController::class,'list'])->name('Instruction.list');
+    Route::get('instruction/view{id}',[InstructionController::class,'view'])->name('Instruction.view');
 
 });
 /****************** PROSPECT MIDDLEWARE PAGES ROUTES END****************/

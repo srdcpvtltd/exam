@@ -10,24 +10,17 @@
                 <div class="media mb-0">
                     <div class="media-body col-lg-4">
                         <h6 class="font-weight-semibold mb-0 ">
-                            {{-- Welcome To Student Panel! --}}
                             {{ Auth::user()->name }}
 
                         </h6>
                     </div>
                     <div class="media-body col-lg-4">
                         <h6 class="font-weight-semibold mb-0 text-center">
-                            {{-- @php
-                                $semster = App\Models\StudentProfile::where('user_id',Auth::user()->id)->first();
-                                // dd( $semster->semester->name);
-                            @endphp
-                            Semester :- {{$semster->semester->name}} --}}
                             {{ Auth::user()->studentProfile->course->title }}
                         </h6>
                     </div>
                     <div class="media-body col-lg-4">
-                        <h6 class="font-weight-semibold mb-0 text-right">
-                            {{-- Course :- {{$semster->course->title}} --}}
+                        <h6 class="font-weight-semibold mb-0 text-right">}
                             Semester: {{ Auth::user()->studentProfile->semester->name }}
                         </h6>
                     </div>

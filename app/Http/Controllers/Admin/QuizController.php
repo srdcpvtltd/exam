@@ -113,4 +113,14 @@ class QuizController extends Controller
             ->with('questions', Question::where('quiz_id', $id)->get())
             ->with('start_time', Carbon::now());
     }
+
+    public function getQuestion(Request $request) {
+        $question_id = $request->input('question_id');
+        $question = Question::find($question_id);
+
+        // Assuming you have a blade view for rendering question HTML
+        $question_html = view('partials.question')->with('question', $question)->render();
+
+        return response()->json(['question_html' => $question_html]);
+    }
 }
