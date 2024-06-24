@@ -115,12 +115,8 @@ class QuizController extends Controller
     }
 
     public function getQuestion(Request $request) {
-        $question_id = $request->input('question_id');
-        $question = Question::find($question_id);
 
-        // Assuming you have a blade view for rendering question HTML
-        $question_html = view('partials.question')->with('question', $question)->render();
-
-        return response()->json(['question_html' => $question_html]);
+        $get_question = Question::where('id',$request->id)->first();
+        return response()->json($get_question);
     }
 }

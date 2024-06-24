@@ -97,12 +97,15 @@
                                     <input id="start_time" type="hidden" name="start_time" value="{{ $start_time }}"
                                         readonly required>
 
-                                    @php $i = 0; @endphp
+                                    @php
+                                        $i = 0;
+                                    @endphp
 
                                     @foreach ($questions as $question)
                                         <div class="question quiz-question-container" id="question{{ $i }}"
                                             style="{{ $i > 0 ? 'display: none;' : '' }}">
-                                            <h5 style="text-align:left;">Question {{ $i + 1 }} :
+                                            <div id="question">
+                                            <h5  style="text-align:left;">Question {{ $i + 1 }} :
                                                 {{ $question->question }}</h5>
 
                                             <div class="row">
@@ -144,7 +147,10 @@
                                             </div>
 
                                         </div>
-                                        @php $i++; @endphp
+                                        </div>
+                                        @php
+                                            $i++;
+                                        @endphp
                                     @endforeach
 
                                     <div class="quiz-navigation mt-3" style="text-align: center;">
@@ -172,7 +178,8 @@
                                 @foreach ($questions as $key => $question)
                                     <div class="col-2 mb-2">
                                         <button type="button"
-                                            class="btn btn-outline-primary rounded-pill btn-xs load-question">
+                                            class="btn btn-outline-primary rounded-pill btn-xs load-question"
+                                            value="{{ $question->id }}">
                                             {{ $key + 1 }}</button>
                                     </div>
                                 @endforeach
@@ -250,20 +257,54 @@
 
     <script>
         $(document).ready(function() {
-            $(document).on('change', '.load-question', function() {
+            $(document).on('click', '.load-question', function() {
 
-                var question_id = $(this).data('question-id');
+                var question_id = $(this).val();
+                var question_no = $(this).text();
+                console.log(question_no);
                 $.ajax({
                     type: "POST",
-                    url: '{{ route('prospect.getQuestion') }}',
+                    url: '{{ url('prospect/get_question') }}',
                     data: {
-                        'question-id': question_id,
+                        'id': question_id,
                         _token: "{{ csrf_token() }}"
                     },
                     dataType: 'json',
-                    success: function(responce) {
-                        $('.quiz-question-container').html(response.quiz - question -
-                        container);
+                    success: function(response) {
+                        $('#question').empty().append(
+                            '<div class="question quiz-question-container" id="question' + question_no + '">' +
+                                '<h5 style="text-align:left;">Question ' + question_no + ' : ' + response.question + '</h5>' +
+                                '<div class="row">' +
+                                    '<div class="col-lg-6">' +
+                                        '<div class="form-check form-check-inline">' +
+                                            '<input class="form-check-input" type="radio" name="answer[' + question_no + ']" value="option_a" required>' +
+                                            '<label class="form-check-label">' + response.option_a + '</label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6">' +
+                                        '<div class="form-check form-check-inline">' +
+                                            '<input class="form-check-input" type="radio" name="answer[' + question_no + ']" value="option_b" required>' +
+                                            '<label class="form-check-label">' + response.option_b + '</label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<br>' +
+                                '<div class="row">' +
+                                    '<div class="col-lg-6">' +
+                                        '<div class="form-check form-check-inline">' +
+                                            '<input class="form-check-input" type="radio" name="answer[' + question_no + ']" value="option_c" required>' +
+                                            '<label class="form-check-label">' + response.option_c + '</label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6">' +
+                                        '<div class="form-check form-check-inline">' +
+                                            '<input class="form-check-input" type="radio" name="answer[' + question_no + ']" value="option_d" required>' +
+                                            '<label class="form-check-label">' + response.option_d + '</label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        );
                     },
                 });
 
