@@ -10,7 +10,7 @@ class InstructionController extends Controller
 {
     public function list()
     {
-        $all_instruction = Instruction::all();
+        $all_instruction = Instruction::orderBy('id','desc')->get ();
         return view('prospect.instruction.list', compact('all_instruction'));
     }
     public function view($id)

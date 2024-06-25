@@ -67,60 +67,6 @@
         <div class="card-header header-elements-inline">
             <h5 class="card-title">Manage Instruction</h5>
         </div>
-        {{-- <table class="table datatable-save-state">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th style="text-align: center">Title</th>
-                    <th style="text-align: right">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $i = 1;
-                @endphp
-                @foreach ($all_instruction as $instruction)
-                    <tr>
-                        <td>{{ $i }}</td>
-                        <td style="text-align: center">{{ $instruction->title }}</td>
-                        <td style="text-align: right">
-                            <button class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
-                                data-target="#viewModal{{ $instruction->id }}">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="viewModal{{ $instruction->id }}" tabindex="-1" role="dialog"
-                        aria-labelledby="instructionModalLabel{{ $instruction->id }}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="instructionModalLabel{{ $instruction->id }}">Instruction
-                                        Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>Title: <br> </strong> {{ $instruction->title }}</p>
-                                    <p><strong>Description:</strong> {!! $instruction->description !!}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @php
-                        $i++;
-                    @endphp
-                @endforeach
-            </tbody>
-        </table> --}}
-
         <div class="container bootstrap snippets bootdey">
             <div class="row">
                 @php
@@ -128,20 +74,18 @@
                 @endphp
                 @foreach ($all_instruction as $instruction)
                     <div class="col-md-4 col-sm-6 col-xs-12">
-
-                        {{-- <a href="#" class="small-box-footer" data-toggle="modal"
-                            data-target="#viewModal{{ $instruction->id }}"> --}}
+                        <a href="#" class="small-box-footer" data-toggle="modal"
+                            data-target="#viewModal{{ $instruction->id }}">
                             <div class="mini-stat clearfix bg-facebook rounded">
                                 <div class="mini-stat-info">
                                     <h6>{{ $instruction->title }}</h6>
                                 </div>
-
-                                <a href="#" class="small-box-footer" data-toggle="modal"
+                                <span style="color: #2196f3" href="#" class="small-box-footer" data-toggle="modal"
                                     data-target="#viewModal{{ $instruction->id }}">More info <i
                                         class="fas fa-arrow-circle-right"></i>
-                                </a>
+                                </span>
                             </div>
-                        {{-- </a> --}}
+                        </a>
 
                     </div>
 
