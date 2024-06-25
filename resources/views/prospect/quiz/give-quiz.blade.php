@@ -7,6 +7,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-body">
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Warning!</strong> Do not refresh the page or navigate away, your progress will be lost.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
                     <div class="media mb-0">
                         <div class="media-body col-lg-4">
                             <h4 class="font-weight-semibold mb-0 ">
@@ -108,7 +116,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link @if ($key === 0) active @endif"
                                         id="pills-question{{ $i }}-tab" data-toggle="pill"
-                                        href="#question{{ $i }}" role="tab" style="padding: 6px 11px">{{ $key + 1 }}</a>
+                                        href="#question{{ $i }}" role="tab"
+                                        style="padding: 6px 11px">{{ $key + 1 }}</a>
                                 </li>
                                 @php $i++; @endphp
                             @endforeach

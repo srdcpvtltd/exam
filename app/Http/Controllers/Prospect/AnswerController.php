@@ -50,9 +50,7 @@ class AnswerController extends Controller
         }
 
         toastr()->success('Quiz done and result published');
-        return redirect()->back();
-
-        // return redirect()->route('prospect.results')->with('success', 'Quiz done and result published');
+        return redirect()->route('prospect.list.quiz');
     }
 
 }
