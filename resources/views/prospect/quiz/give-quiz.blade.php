@@ -14,7 +14,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    
+
                     <div class="media mb-0">
                         <div class="media-body col-lg-4">
                             <h4 class="font-weight-semibold mb-0 ">
@@ -110,15 +110,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Questions ({{ count($questions) }})</h5>
-                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist" style="max-height: 130px; overflow-y: auto;">
                             @php $i = 0; @endphp
                             @foreach ($questions as $key => $question)
                                 <li class="nav-item">
                                     <a class="nav-link @if ($key === 0) active @endif"
                                         id="pills-question{{ $i }}-tab" data-toggle="pill"
                                         href="#question{{ $i }}" role="tab"
-                                        style="padding: 6px 11px">{{ $key + 1 }}</a>
+                                        style="padding: 6px 11px;">{{ $key + 1 }}</a>
                                 </li>
+                                
                                 @php $i++; @endphp
                             @endforeach
                         </ul>
